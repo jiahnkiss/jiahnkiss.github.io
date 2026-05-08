@@ -1,11 +1,172 @@
-# CLAUDE.md
+# AGENTS.md
 
-이 프로젝트에서는 `AGENTS.md`의 지침을 따릅니다.
+## Project overview
 
-특히 다음을 지켜주세요.
+This project is a beginner-friendly personal blog template for a GitHub Pages and Jekyll workshop.
 
-- 입문용 Jekyll 개인 블로그 구조를 유지합니다.
-- 복잡한 프레임워크나 빌드 도구를 추가하지 않습니다.
-- 작업 전에 어떤 파일을 바꿀지 먼저 설명합니다.
-- 참가자가 이해할 수 있는 말로 오류와 변경사항을 설명합니다.
-- Pull Request 흐름은 이 개인 블로그 템플릿에서 다루지 않습니다.
+The goal is to help a participant understand how a small personal blog is edited locally, recorded with Git, pushed to GitHub, and published as a GitHub Pages site.
+
+This is not a production web application. Keep the structure simple enough for a first-time GitHub Pages user to understand.
+
+## Workshop context
+
+Participants will use this template to create their own `username.github.io` repository.
+
+They should learn these core ideas:
+
+- a repository is the home of a project
+- a local folder is their working copy
+- a commit is a saved moment
+- push sends local changes to GitHub
+- pull brings GitHub changes back into the local folder
+- GitHub Pages gives the project a public web address
+- Jekyll turns Markdown posts, layouts, and styles into a static blog
+
+Do not introduce Pull Request workflows in this personal blog template. Pull Requests belong to the separate shared community blog exercise.
+
+## Intended project structure
+
+This template should stay close to a minimal Jekyll blog:
+
+- `_config.yml`: site title, description, author, and basic Jekyll settings
+- `index.html`: home page that lists posts
+- `_posts/`: Markdown blog posts
+- `_layouts/default.html`: shared HTML wrapper
+- `_layouts/post.html`: layout for individual posts
+- `assets/css/style.css`: site styling
+- `README.md`: human-facing guide for participants
+- `AGENTS.md`: AI-agent-facing guide for this project
+
+## Recommended editing areas
+
+During the workshop, prefer editing only these areas:
+
+- `_config.yml`
+- `_posts/*.md`
+- `assets/css/style.css`
+- `README.md`
+
+Only edit `_layouts/` when the participant explicitly wants to change the repeated page structure.
+
+## Setup and environment checks
+
+Before running install or preview commands, inspect the environment.
+
+Check:
+
+```sh
+ruby -v
+bundle -v
+```
+
+If Ruby and Bundler are available, use:
+
+```sh
+bundle install
+bundle exec jekyll serve
+```
+
+The local preview URL is usually:
+
+```text
+http://localhost:4000
+```
+
+If Jekyll cannot run locally, explain the missing requirement in beginner-friendly language. Do not force complex installation steps without the participant's approval.
+
+If local preview is not available, the participant can still edit files, commit, push, and check the result through GitHub Pages after deployment.
+
+## Superpowers workflow
+
+If Superpowers skills are available, use `superpowers:brainstorming` before creative or structural work.
+
+Use brainstorming before:
+
+- changing the blog concept
+- changing the visual design
+- adding a page
+- changing how posts are listed
+- reorganizing layouts
+- rewriting the README
+- adding custom behavior
+
+If Superpowers is not available, manually follow a short brainstorming flow:
+
+1. Ask what the participant wants their blog to feel like.
+2. Ask what they want the first page to show.
+3. Suggest 2-3 simple directions.
+4. Explain which files would change.
+5. Wait for approval before editing.
+
+Do not skip planning just because the requested change sounds small.
+
+## Agent behavior
+
+When the participant first opens this project, do not edit files immediately.
+
+First:
+
+1. Read this `AGENTS.md`.
+2. Explain the project goal in simple language.
+3. Explain the file structure.
+4. Explain which files the participant is expected to edit.
+5. Check whether Jekyll can run locally.
+6. If creative work is requested, use `superpowers:brainstorming` or the manual brainstorming flow.
+7. Before editing, say which files will change and why.
+
+After editing, summarize:
+
+1. changed files
+2. what changed
+3. how to preview the result
+4. whether commit or push is still needed
+
+Do not commit, push, rename the repository, or change GitHub Pages settings unless the participant explicitly asks.
+
+## What to avoid
+
+Avoid adding complexity that hides the GitHub Pages and Jekyll learning goal.
+
+Do not add these unless explicitly requested:
+
+- React, Vue, Svelte, Next.js, Vite, or other frontend frameworks
+- npm build systems
+- TypeScript tooling
+- complex JavaScript interactions
+- custom GitHub Actions
+- databases
+- authentication
+- API servers
+- analytics or tracking scripts
+- large layout rewrites
+
+Keep the template readable, plain, and easy to inspect.
+
+## Design direction
+
+Use a minimal personal blog style:
+
+- system fonts
+- narrow readable body width
+- plain links
+- clear post list
+- simple Markdown-first writing
+- minimal color changes
+
+Prefer small, understandable improvements over dramatic redesigns.
+
+## Common problems
+
+When something breaks, check these first:
+
+- the repository name is not `username.github.io`
+- GitHub Pages has not finished deploying yet
+- Ruby is not installed
+- Bundler is not installed
+- `bundle install` failed
+- a post file name does not follow `YYYY-MM-DD-title.md`
+- a Markdown post is missing front matter
+- front matter contains a broken quote, colon, or date
+- CSS was moved but the layout still points to the old path
+
+Explain errors as part of the workshop. The goal is not only to fix the issue, but to help the participant understand what kind of issue it is.
