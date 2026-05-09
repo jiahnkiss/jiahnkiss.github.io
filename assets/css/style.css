@@ -1,16 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap');
+
 html {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: 0;
+  font-family: 'Gowun Batang', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.9;
+  letter-spacing: 0.01em;
 }
 
 body {
-  margin: 2rem auto;
-  max-width: 42rem;
-  padding: 0 1rem 4rem;
-  color: #111;
-  background: #fff;
+  margin: 3rem auto;
+  max-width: 40rem;
+  padding: 0 1.5rem 6rem;
+  color: #3b2f1e;
+  background-color: #f5f0e8;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
   word-break: keep-all;
   word-wrap: normal;
   overflow-wrap: normal;
@@ -21,18 +25,28 @@ body {
 h1,
 h2,
 h3 {
-  line-height: 1.25;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #2c1f0f;
 }
 
 .site-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
   word-break: normal;
   overflow-wrap: anywhere;
 }
 
-.site-description,
+.site-description {
+  color: #7a6248;
+  font-size: 0.9rem;
+}
+
 .post-meta,
 time {
-  color: #555;
+  color: #7a6248;
+  font-size: 0.88rem;
 }
 
 .post-meta span::before {
@@ -50,43 +64,51 @@ blockquote {
 }
 
 a {
-  color: #0645ad;
+  color: #6b4a2a;
+  text-decoration-color: #c9ad8a;
   overflow-wrap: anywhere;
 }
 
 a:visited {
-  color: #0b0080;
+  color: #4e3420;
+}
+
+a:hover {
+  color: #3b2010;
 }
 
 .post-list {
-  padding-left: 1.4rem;
+  padding-left: 0;
+  list-style: none;
 }
 
 .post-list li {
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.6rem;
 }
 
 .post-list time {
   margin-right: 0.5rem;
+  color: #7a6248;
 }
 
 blockquote {
   margin-left: 0;
   padding-left: 1rem;
-  border-left: 1px solid #aaa;
-  color: #333;
+  border-left: 2px solid #c9ad8a;
+  color: #5a4030;
 }
 
 code,
 pre {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.95em;
+  font-size: 0.92em;
 }
 
 pre {
   overflow-x: auto;
   padding: 0.75rem;
-  border: 1px solid #ddd;
+  border: 1px solid #d9c9b0;
+  background: #ede8de;
   word-break: normal;
   overflow-wrap: normal;
 }
