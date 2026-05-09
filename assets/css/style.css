@@ -304,13 +304,9 @@ a:hover {
   font-size: 0.88em;
 }
 
-.title-row {
-  display: flex;
-  align-items: baseline;
-  gap: 1rem;
-}
-
 .words-link {
+  display: block;
+  text-align: right;
   font-size: 0.78em;
   color: #a8906e;
   text-decoration: underline;
