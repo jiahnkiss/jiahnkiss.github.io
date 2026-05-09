@@ -16,6 +16,10 @@ title: home
   var container = document.getElementById('spiralContainer');
   var links = container.querySelectorAll('.spiral-post');
   var n = links.length;
+  var positions = [];
+  var mouse = { x: -9999, y: -9999 };
+  var REPEL_RADIUS = 40;
+  var REPEL_STRENGTH = 8;
 
   function layout() {
     var W = container.offsetWidth;
@@ -28,18 +32,67 @@ title: home
     var a = maxR * 0.12;
     var b = (maxR - a) / totalAngle;
 
+    positions = [];
     for (var i = 0; i < n; i++) {
       var t = n > 1 ? (i / (n - 1)) * totalAngle : 0;
       var r = a + b * t;
       var angle = t - Math.PI / 2;
       var x = cx + r * Math.cos(angle);
       var y = cy + r * Math.sin(angle);
+      positions.push({ x: x, y: y });
+      links[i].style.transition = 'none';
       links[i].style.left = x + 'px';
       links[i].style.top = y + 'px';
     }
   }
 
+  function attract() {
+    var rect = container.getBoundingClientRect();
+    var mx = mouse.x - rect.left;
+    var my = mouse.y - rect.top;
+
+    for (var i = 0; i < n; i++) {
+      var ox = positions[i].x;
+      var oy = positions[i].y;
+      var dx = mx - ox;
+      var dy = my - oy;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+
+      links[i].style.transition = 'none';
+
+      if (dist < REPEL_RADIUS && dist > 0) {
+        var scale = Math.pow(i / (n - 1), 1.8);
+        var force = (1 - dist / REPEL_RADIUS) * REPEL_STRENGTH * scale;
+        links[i].style.left = (ox + (dx / dist) * force) + 'px';
+        links[i].style.top  = (oy + (dy / dist) * force) + 'px';
+      } else {
+        links[i].style.left = ox + 'px';
+        links[i].style.top  = oy + 'px';
+      }
+    }
+  }
+
+  function restore() {
+    for (var i = 0; i < n; i++) {
+      links[i].style.transition = 'left 0.5s ease-out, top 0.5s ease-out';
+      links[i].style.left = positions[i].x + 'px';
+      links[i].style.top  = positions[i].y + 'px';
+    }
+  }
+
   layout();
   window.addEventListener('resize', layout);
+
+  window.addEventListener('mousemove', function (e) {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    attract();
+  });
+
+  container.addEventListener('mouseleave', function () {
+    mouse.x = -9999;
+    mouse.y = -9999;
+    restore();
+  });
 })();
 </script>
