@@ -128,6 +128,53 @@ a:hover {
   pointer-events: none;
 }
 
+.floating-feather {
+  position: fixed;
+  z-index: 50;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.55;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  transition: opacity 0.3s;
+  pointer-events: auto;
+}
+
+.floating-feather:hover {
+  opacity: 0.9;
+}
+
+@keyframes featherFloat0 {
+  0%   { transform: translate(0px,   0px)  rotate(-12deg); }
+  20%  { transform: translate(18px, -24px) rotate(5deg);   }
+  45%  { transform: translate(6px,  -42px) rotate(-18deg); }
+  70%  { transform: translate(-16px,-22px) rotate(8deg);   }
+  100% { transform: translate(0px,   0px)  rotate(-12deg); }
+}
+
+@keyframes featherFloat1 {
+  0%   { transform: translate(0px,   0px)  rotate(9deg);   }
+  30%  { transform: translate(-24px,-16px) rotate(-7deg);  }
+  55%  { transform: translate(10px, -38px) rotate(17deg);  }
+  80%  { transform: translate(22px, -10px) rotate(-11deg); }
+  100% { transform: translate(0px,   0px)  rotate(9deg);   }
+}
+
+@keyframes featherFloat2 {
+  0%   { transform: translate(0px,   0px)  rotate(-5deg);  }
+  25%  { transform: translate(26px, -14px) rotate(13deg);  }
+  50%  { transform: translate(8px,  -44px) rotate(-9deg);  }
+  75%  { transform: translate(-20px,-26px) rotate(19deg);  }
+  100% { transform: translate(0px,   0px)  rotate(-5deg);  }
+}
+
+@keyframes featherFloat3 {
+  0%   { transform: translate(0px,   0px)  rotate(16deg);  }
+  35%  { transform: translate(-14px,-32px) rotate(-13deg); }
+  65%  { transform: translate(24px, -18px) rotate(6deg);   }
+  100% { transform: translate(0px,   0px)  rotate(16deg);  }
+}
+
 .back-link {
   font-size: 1.2em;
   text-decoration: none;
