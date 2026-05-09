@@ -5,14 +5,41 @@ title: home
 
 <h1 class="site-title">{{ site.title | escape }}</h1>
 
-{% if site.posts.size > 0 %}
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-      </li>
-    {% endfor %}
-  </ul>
-{% else %}
-  <p>아직 글이 없습니다.</p>
-{% endif %}
+<div class="spiral-container" id="spiralContainer">
+  {% for post in site.posts %}
+  <a class="spiral-post" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+  {% endfor %}
+</div>
+
+<script>
+(function () {
+  var container = document.getElementById('spiralContainer');
+  var links = container.querySelectorAll('.spiral-post');
+  var n = links.length;
+
+  function layout() {
+    var W = container.offsetWidth;
+    var H = container.offsetHeight;
+    var cx = W / 2;
+    var cy = H / 2;
+    var maxR = Math.min(W, H) / 2 - 48;
+
+    var totalAngle = 4.2 * Math.PI;
+    var a = maxR * 0.12;
+    var b = (maxR - a) / totalAngle;
+
+    for (var i = 0; i < n; i++) {
+      var t = n > 1 ? (i / (n - 1)) * totalAngle : 0;
+      var r = a + b * t;
+      var angle = t - Math.PI / 2;
+      var x = cx + r * Math.cos(angle);
+      var y = cy + r * Math.sin(angle);
+      links[i].style.left = x + 'px';
+      links[i].style.top = y + 'px';
+    }
+  }
+
+  layout();
+  window.addEventListener('resize', layout);
+})();
+</script>
