@@ -305,15 +305,19 @@ a:hover {
 }
 
 .words-link {
-  display: inline-block;
-  margin-top: 1.2rem;
+  display: block;
+  margin-top: 2.5rem;
+  margin-left: 0.1rem;
   font-size: 0.82em;
   color: #a8906e;
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-color: #c9ad8a;
+  text-underline-offset: 0.25em;
 }
 
 .words-link:hover {
   color: #6b4a2a;
+  text-decoration-color: #6b4a2a;
 }
 
 .back-link {
