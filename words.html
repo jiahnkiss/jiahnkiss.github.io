@@ -32,17 +32,18 @@ title: words
 
   var db = firebase.firestore();
 
-  // 문서 ID로 일정한 위치 생성 (모든 방문자가 같은 배치로 봄)
+  // 문서 ID로 일정한 값 생성 (모든 방문자가 같은 배치로 봄)
   function seeded(id) {
     var h = 0;
     for (var i = 0; i < id.length; i++) {
       h = Math.imul(31, h) + id.charCodeAt(i) | 0;
     }
-    var a = Math.abs(Math.sin(h * 127.1));
-    var b = Math.abs(Math.sin(h * 311.7));
-    var c = Math.abs(Math.sin(h * 74.2));
-    var d = Math.abs(Math.sin(h * 183.3));
-    return { x: a, y: b, rot: c, size: d };
+    return {
+      x:    Math.abs(Math.sin(h * 127.1)),
+      size: Math.abs(Math.sin(h * 183.3)),
+      dur:  Math.abs(Math.sin(h * 259.4)),
+      del:  Math.abs(Math.sin(h * 331.8)),
+    };
   }
 
   // 단어 목록 실시간 표시
@@ -54,11 +55,10 @@ title: words
       var span = document.createElement('span');
       span.className = 'word-item';
       span.textContent = doc.data().word;
-      span.style.left    = (4 + rnd.x * 82) + '%';
-      span.style.top     = (2 + rnd.y * 85) + '%';
-      span.style.transform = 'rotate(' + (rnd.rot * 22 - 11) + 'deg)';
-      span.style.fontSize  = (0.82 + rnd.size * 0.45) + 'em';
-      span.style.opacity   = (0.6 + rnd.size * 0.4);
+      span.style.left              = (3 + rnd.x * 88) + '%';
+      span.style.fontSize          = (0.6 + rnd.size * 0.28) + 'em';
+      span.style.animationDuration = (5 + rnd.dur * 7) + 's';
+      span.style.animationDelay    = '-' + (rnd.del * 10) + 's';
       list.appendChild(span);
     });
   });

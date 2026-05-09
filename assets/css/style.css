@@ -243,6 +243,7 @@ a:hover {
   width: 100%;
   height: 420px;
   margin-bottom: 2rem;
+  overflow: hidden;
 }
 
 .word-item {
@@ -251,6 +252,14 @@ a:hover {
   color: #3b2f1e;
   white-space: nowrap;
   pointer-events: none;
+  animation: wordRain linear infinite;
+}
+
+@keyframes wordRain {
+  0%   { top: -6%;  opacity: 0; }
+  10%  { opacity: 0.72; }
+  88%  { opacity: 0.72; }
+  100% { top: 106%; opacity: 0; }
 }
 
 .word-submit {
