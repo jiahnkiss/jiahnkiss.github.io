@@ -54,7 +54,7 @@ layout: default
 
     function update() {
       var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      var docH = document.documentElement.scrollHeight - window.innerHeight;
+      var docH = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       var pct = docH > 0 ? Math.min(scrollTop / docH, 1) : 0;
       prog.style.strokeDashoffset = len * (1 - pct);
     }
