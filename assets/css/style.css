@@ -306,7 +306,7 @@ a:hover {
 
 .words-link {
   display: block;
-  text-align: right;
+  text-align: left;
   font-size: 0.78em;
   color: #a8906e;
   text-decoration: underline;
