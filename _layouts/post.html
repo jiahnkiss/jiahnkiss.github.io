@@ -52,15 +52,22 @@ layout: default
     prog.style.strokeDasharray = len;
     prog.style.strokeDashoffset = len;
 
-    var docH = document.documentElement.scrollHeight - window.innerHeight;
+    function getDocH() {
+      var vph = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+      return document.documentElement.scrollHeight - vph;
+    }
 
     function update() {
       var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      var docH = getDocH();
       var pct = docH > 0 ? Math.min(scrollTop / docH, 1) : 0;
       prog.style.strokeDashoffset = len * (1 - pct);
     }
 
     window.addEventListener('scroll', update);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', update);
+    }
     update();
   });
 })();
