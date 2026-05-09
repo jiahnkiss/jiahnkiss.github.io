@@ -30,9 +30,15 @@
       a.style.left   = (8 + Math.random() * 80) + 'vw';
       a.style.top    = (8 + Math.random() * 80) + 'vh';
       a.style.fontSize = (2.2 + Math.random() * 0.5) + 'em';
-      a.style.animationName     = animations[Math.floor(Math.random() * animations.length)];
-      a.style.animationDuration = (7 + Math.random() * 5) + 's';
-      a.style.animationDelay    = (-Math.random() * 8) + 's';
+      var anim = animations[Math.floor(Math.random() * animations.length)];
+      var dur  = (7 + Math.random() * 5) + 's';
+      var del  = (-Math.random() * 8) + 's';
+      a.style.animationName           = anim;
+      a.style.animationDuration       = dur;
+      a.style.animationDelay          = del;
+      a.style.webkitAnimationName     = anim;
+      a.style.webkitAnimationDuration = dur;
+      a.style.webkitAnimationDelay    = del;
 
       document.body.appendChild(a);
     })();
