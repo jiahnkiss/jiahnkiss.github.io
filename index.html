@@ -19,83 +19,106 @@ title: home
   var container = document.getElementById('spiralContainer');
   var items = container.querySelectorAll('.spiral-item');
   var n = items.length;
-  var positions = [];
-  var mouse = { x: -9999, y: -9999 };
+
   var REPEL_RADIUS = 40;
   var REPEL_STRENGTH = 8;
+  var ROTATION_SPEED = 0.00009; // rad/ms, 시계반대방향
 
-  function layout() {
+  var basePositions = [];
+  var rotationOffset = 0;
+  var lastTime = null;
+  var mouseInside = false;
+  var mouse = { x: -9999, y: -9999 };
+
+  function computeBase(rotOffset) {
     var W = container.offsetWidth;
     var H = container.offsetHeight;
     var cx = W / 2;
     var cy = H / 2;
     var maxR = Math.min(W, H) / 2 - 48;
-
     var totalAngle = 4.2 * Math.PI;
     var a = maxR * 0.12;
     var b = (maxR - a) / totalAngle;
 
-    positions = [];
+    basePositions = [];
     for (var i = 0; i < n; i++) {
       var t = n > 1 ? (i / (n - 1)) * totalAngle : 0;
       var r = a + b * t;
-      var angle = t - Math.PI / 2;
-      var x = cx + r * Math.cos(angle);
-      var y = cy + r * Math.sin(angle);
-      positions.push({ x: x, y: y });
-      items[i].style.transition = 'none';
-      items[i].style.left = x + 'px';
-      items[i].style.top = y + 'px';
+      var angle = t - Math.PI / 2 + rotOffset;
+      basePositions.push({
+        x: cx + r * Math.cos(angle),
+        y: cy + r * Math.sin(angle)
+      });
     }
   }
 
-  function attract() {
+  function render() {
     var rect = container.getBoundingClientRect();
     var mx = mouse.x - rect.left;
     var my = mouse.y - rect.top;
 
     for (var i = 0; i < n; i++) {
-      var ox = positions[i].x;
-      var oy = positions[i].y;
-      var dx = mx - ox;
-      var dy = my - oy;
-      var dist = Math.sqrt(dx * dx + dy * dy);
-
+      var ox = basePositions[i].x;
+      var oy = basePositions[i].y;
       items[i].style.transition = 'none';
 
-      if (dist < REPEL_RADIUS && dist > 0) {
-        var scale = Math.pow(i / (n - 1), 1.8);
-        var force = (1 - dist / REPEL_RADIUS) * REPEL_STRENGTH * scale;
-        items[i].style.left = (ox + (dx / dist) * force) + 'px';
-        items[i].style.top  = (oy + (dy / dist) * force) + 'px';
-      } else {
-        items[i].style.left = ox + 'px';
-        items[i].style.top  = oy + 'px';
+      if (mouseInside) {
+        var dx = mx - ox;
+        var dy = my - oy;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < REPEL_RADIUS && dist > 0) {
+          var scale = Math.pow(i / (n - 1), 1.8);
+          var force = (1 - dist / REPEL_RADIUS) * REPEL_STRENGTH * scale;
+          items[i].style.left = (ox + (dx / dist) * force) + 'px';
+          items[i].style.top  = (oy + (dy / dist) * force) + 'px';
+          continue;
+        }
       }
+
+      items[i].style.left = ox + 'px';
+      items[i].style.top  = oy + 'px';
     }
   }
 
-  function restore() {
-    for (var i = 0; i < n; i++) {
-      items[i].style.transition = 'left 0.5s ease-out, top 0.5s ease-out';
-      items[i].style.left = positions[i].x + 'px';
-      items[i].style.top  = positions[i].y + 'px';
+  function animate(timestamp) {
+    if (!mouseInside) {
+      if (lastTime !== null) {
+        rotationOffset -= ROTATION_SPEED * (timestamp - lastTime);
+      }
+      lastTime = timestamp;
+      computeBase(rotationOffset);
+      render();
     }
+    requestAnimationFrame(animate);
   }
 
-  layout();
-  window.addEventListener('resize', layout);
+  computeBase(rotationOffset);
+  render();
+  requestAnimationFrame(animate);
 
-  window.addEventListener('mousemove', function (e) {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-    attract();
+  window.addEventListener('resize', function () {
+    computeBase(rotationOffset);
+    render();
+  });
+
+  container.addEventListener('mouseenter', function () {
+    mouseInside = true;
+    lastTime = null;
   });
 
   container.addEventListener('mouseleave', function () {
+    mouseInside = false;
     mouse.x = -9999;
     mouse.y = -9999;
-    restore();
+  });
+
+  window.addEventListener('mousemove', function (e) {
+    if (mouseInside) {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      render();
+    }
   });
 })();
 </script>
