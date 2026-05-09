@@ -304,15 +304,19 @@ a:hover {
   font-size: 0.88em;
 }
 
+.title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
 .words-link {
-  display: block;
-  margin-top: 2.5rem;
-  margin-left: 0.1rem;
-  font-size: 0.82em;
+  font-size: 0.78em;
   color: #a8906e;
   text-decoration: underline;
   text-decoration-color: #c9ad8a;
   text-underline-offset: 0.25em;
+  white-space: nowrap;
 }
 
 .words-link:hover {

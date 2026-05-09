@@ -3,8 +3,10 @@ layout: default
 title: home
 ---
 
-<h1 class="site-title">{{ site.title | escape }}</h1>
-<a href="/words" class="words-link">단어 모음</a>
+<div class="title-row">
+  <a href="/words" class="words-link">단어 모음</a>
+  <h1 class="site-title">{{ site.title | escape }}</h1>
+</div>
 
 <div class="spiral-container" id="spiralContainer">
   {% for post in site.posts %}
