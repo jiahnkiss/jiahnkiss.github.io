@@ -140,7 +140,9 @@ a:hover {
 
 @media (max-width: 600px) {
   .spiral-container {
-    height: calc(100svh - 7rem);
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    height: calc(100svh - 6rem);
     min-height: 480px;
   }
 
