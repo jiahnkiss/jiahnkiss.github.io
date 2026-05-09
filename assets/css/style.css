@@ -128,10 +128,20 @@ a:hover {
   pointer-events: none;
 }
 
+.back-link {
+  font-size: 1.2em;
+  text-decoration: none;
+  color: #6b4a2a;
+}
+
+.back-link:hover {
+  color: #2c1f0f;
+}
+
 @media (max-width: 600px) {
   .spiral-container {
-    height: 110vw;
-    min-height: 420px;
+    height: calc(100svh - 7rem);
+    min-height: 480px;
   }
 
   .spiral-post {
