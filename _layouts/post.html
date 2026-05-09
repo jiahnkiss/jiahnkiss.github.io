@@ -4,6 +4,10 @@ layout: default
 
 <p><a href="{{ '/' | relative_url }}" class="back-link">&#8592;</a></p>
 
+<div class="scroll-spiral">
+  <svg id="spiralSvg" width="44" height="44" viewBox="0 0 44 44"></svg>
+</div>
+
 <article>
   <header>
     <h1 class="post-title">{{ page.title | escape }}</h1>
@@ -11,3 +15,52 @@ layout: default
 
   {{ content }}
 </article>
+
+<script>
+(function () {
+  var svg = document.getElementById('spiralSvg');
+  var cx = 22, cy = 22, maxR = 18, rotations = 2.2, steps = 600;
+  var totalAngle = rotations * 2 * Math.PI;
+  var minR = 1.5;
+
+  // 안쪽 → 바깥쪽 경로 (단일 연속선)
+  var pts = [];
+  for (var i = 0; i <= steps; i++) {
+    var t = i / steps;
+    var theta = t * totalAngle;
+    var r = minR + (maxR - minR) * t;
+    pts.push(
+      (cx + r * Math.cos(theta - Math.PI / 2)).toFixed(2) + ',' +
+      (cy + r * Math.sin(theta - Math.PI / 2)).toFixed(2)
+    );
+  }
+  var d = 'M ' + pts.join(' L ');
+
+  var prog = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  prog.setAttribute('d', d);
+  prog.setAttribute('fill', 'none');
+  prog.setAttribute('stroke', '#6b4a2a');
+  prog.setAttribute('stroke-width', '1.2');
+  prog.setAttribute('stroke-linecap', 'round');
+  prog.setAttribute('stroke-linejoin', 'round');
+  svg.appendChild(prog);
+
+  requestAnimationFrame(function () {
+    var len = prog.getTotalLength();
+    if (!len) return;
+
+    prog.style.strokeDasharray = len;
+    prog.style.strokeDashoffset = len;
+
+    function update() {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      var docH = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = docH > 0 ? Math.min(scrollTop / docH, 1) : 0;
+      prog.style.strokeDashoffset = len * (1 - pct);
+    }
+
+    window.addEventListener('scroll', update);
+    update();
+  });
+})();
+</script>
