@@ -5,6 +5,8 @@ title: home
 
 <h1 class="site-title">{{ site.title | escape }}</h1>
 
+<a href="/words" class="words-link">단어 모음</a>
+
 <div class="spiral-container" id="spiralContainer">
   {% for post in site.posts %}
   <a class="spiral-item spiral-post" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
@@ -14,8 +16,6 @@ title: home
   <span class="spiral-item spiral-dot"></span>
   {% endfor %}
 </div>
-
-<a href="/words" class="words-link">단어 모음</a>
 
 <script>
 (function () {

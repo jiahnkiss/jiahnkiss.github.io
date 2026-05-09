@@ -306,18 +306,18 @@ a:hover {
 
 .words-link {
   display: block;
-  text-align: left;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   font-size: 0.78em;
   color: #a8906e;
   text-decoration: underline;
-  text-decoration-color: #c9ad8a;
+  text-decoration-color: currentColor;
   text-underline-offset: 0.25em;
   white-space: nowrap;
 }
 
 .words-link:hover {
   color: #6b4a2a;
-  text-decoration-color: #6b4a2a;
 }
 
 .back-link {
