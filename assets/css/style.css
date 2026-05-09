@@ -302,6 +302,7 @@ a:hover {
 .word-done {
   color: #a8906e;
   font-size: 0.88em;
+  margin-top: 1.2rem;
 }
 
 .words-link {
