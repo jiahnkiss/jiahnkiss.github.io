@@ -25,7 +25,7 @@
       a.target = '_blank';
       a.rel = 'noopener noreferrer';
       a.className = 'floating-feather';
-      a.textContent = '🪽';
+      a.innerHTML = '<span style="pointer-events:none;">🪽</span>';
 
       a.style.left   = (8 + Math.random() * 80) + 'vw';
       a.style.top    = (8 + Math.random() * 80) + 'vh';

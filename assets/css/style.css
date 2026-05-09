@@ -143,6 +143,9 @@ a:hover {
   transition: opacity 0.3s;
   pointer-events: auto;
   will-change: transform;
+  display: inline-block;
+  line-height: 1;
+  padding: 0;
 }
 
 .floating-feather:hover {
