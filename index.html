@@ -7,15 +7,18 @@ title: home
 
 <div class="spiral-container" id="spiralContainer">
   {% for post in site.posts %}
-  <a class="spiral-post" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+  <a class="spiral-item spiral-post" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+  {% endfor %}
+  {% for i in (1..25) %}
+  <span class="spiral-item spiral-dot"></span>
   {% endfor %}
 </div>
 
 <script>
 (function () {
   var container = document.getElementById('spiralContainer');
-  var links = container.querySelectorAll('.spiral-post');
-  var n = links.length;
+  var items = container.querySelectorAll('.spiral-item');
+  var n = items.length;
   var positions = [];
   var mouse = { x: -9999, y: -9999 };
   var REPEL_RADIUS = 40;
@@ -40,9 +43,9 @@ title: home
       var x = cx + r * Math.cos(angle);
       var y = cy + r * Math.sin(angle);
       positions.push({ x: x, y: y });
-      links[i].style.transition = 'none';
-      links[i].style.left = x + 'px';
-      links[i].style.top = y + 'px';
+      items[i].style.transition = 'none';
+      items[i].style.left = x + 'px';
+      items[i].style.top = y + 'px';
     }
   }
 
@@ -58,25 +61,25 @@ title: home
       var dy = my - oy;
       var dist = Math.sqrt(dx * dx + dy * dy);
 
-      links[i].style.transition = 'none';
+      items[i].style.transition = 'none';
 
       if (dist < REPEL_RADIUS && dist > 0) {
         var scale = Math.pow(i / (n - 1), 1.8);
         var force = (1 - dist / REPEL_RADIUS) * REPEL_STRENGTH * scale;
-        links[i].style.left = (ox + (dx / dist) * force) + 'px';
-        links[i].style.top  = (oy + (dy / dist) * force) + 'px';
+        items[i].style.left = (ox + (dx / dist) * force) + 'px';
+        items[i].style.top  = (oy + (dy / dist) * force) + 'px';
       } else {
-        links[i].style.left = ox + 'px';
-        links[i].style.top  = oy + 'px';
+        items[i].style.left = ox + 'px';
+        items[i].style.top  = oy + 'px';
       }
     }
   }
 
   function restore() {
     for (var i = 0; i < n; i++) {
-      links[i].style.transition = 'left 0.5s ease-out, top 0.5s ease-out';
-      links[i].style.left = positions[i].x + 'px';
-      links[i].style.top  = positions[i].y + 'px';
+      items[i].style.transition = 'left 0.5s ease-out, top 0.5s ease-out';
+      items[i].style.left = positions[i].x + 'px';
+      items[i].style.top  = positions[i].y + 'px';
     }
   }
 
