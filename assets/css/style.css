@@ -130,13 +130,8 @@ a:hover {
 
 @media (max-width: 600px) {
   .spiral-container {
-    height: 74vw;
-    min-height: 340px;
-  }
-
-  .spiral-post {
-    font-size: 1.05em;
-    padding: 6px;
+    height: 92vw;
+    min-height: 380px;
   }
 }
 
