@@ -103,7 +103,9 @@ a:hover {
   transform: translate(-50%, -50%);
   color: #6b4a2a;
   text-decoration: none;
-  font-size: 0.88em;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1em;
+  font-weight: 400;
   white-space: nowrap;
   transition: color 0.2s;
 }
@@ -203,6 +205,13 @@ a:hover {
   35%  { transform: translate(-14px,-32px) rotate(-13deg); }
   65%  { transform: translate(24px, -18px) rotate(6deg);   }
   100% { transform: translate(0px,   0px)  rotate(16deg);  }
+}
+
+.post-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 2.2em;
+  font-weight: 600;
+  color: #2c1f0f;
 }
 
 .back-link {

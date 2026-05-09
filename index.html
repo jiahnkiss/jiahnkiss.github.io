@@ -9,7 +9,8 @@ title: home
   {% for post in site.posts %}
   <a class="spiral-item spiral-post" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
   {% endfor %}
-  {% for i in (1..25) %}
+  {% assign dot_count = 30 | minus: site.posts.size %}
+  {% for i in (1..dot_count) %}
   <span class="spiral-item spiral-dot"></span>
   {% endfor %}
 </div>
