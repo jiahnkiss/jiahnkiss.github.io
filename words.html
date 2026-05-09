@@ -6,8 +6,7 @@ title: words
 <p><a href="{{ '/' | relative_url }}" class="back-link">&#8592;</a></p>
 
 <div class="words-page">
-
-  <div id="wordsList" class="words-list"></div>
+  <div id="wordsList" class="words-scatter"></div>
 
   <div id="submitArea" class="word-submit">
     <input type="text" id="wordInput" class="word-input" placeholder="단어 하나를 남겨주세요" maxlength="20" autocomplete="off">
@@ -15,7 +14,6 @@ title: words
   </div>
 
   <p id="doneMsg" class="word-done" style="display:none;">이미 단어를 남겼어요.</p>
-
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -34,14 +32,33 @@ title: words
 
   var db = firebase.firestore();
 
+  // 문서 ID로 일정한 위치 생성 (모든 방문자가 같은 배치로 봄)
+  function seeded(id) {
+    var h = 0;
+    for (var i = 0; i < id.length; i++) {
+      h = Math.imul(31, h) + id.charCodeAt(i) | 0;
+    }
+    var a = Math.abs(Math.sin(h * 127.1));
+    var b = Math.abs(Math.sin(h * 311.7));
+    var c = Math.abs(Math.sin(h * 74.2));
+    var d = Math.abs(Math.sin(h * 183.3));
+    return { x: a, y: b, rot: c, size: d };
+  }
+
   // 단어 목록 실시간 표시
   db.collection('words').orderBy('timestamp', 'asc').onSnapshot(function (snapshot) {
     var list = document.getElementById('wordsList');
     list.innerHTML = '';
     snapshot.forEach(function (doc) {
+      var rnd = seeded(doc.id);
       var span = document.createElement('span');
       span.className = 'word-item';
       span.textContent = doc.data().word;
+      span.style.left    = (4 + rnd.x * 82) + '%';
+      span.style.top     = (2 + rnd.y * 85) + '%';
+      span.style.transform = 'rotate(' + (rnd.rot * 22 - 11) + 'deg)';
+      span.style.fontSize  = (0.82 + rnd.size * 0.45) + 'em';
+      span.style.opacity   = (0.6 + rnd.size * 0.4);
       list.appendChild(span);
     });
   });
@@ -61,7 +78,6 @@ title: words
   function submit() {
     var word = document.getElementById('wordInput').value.trim();
     if (!word) return;
-
     db.collection('words').add({
       word: word,
       timestamp: firebase.firestore.FieldValue.serverTimestamp()

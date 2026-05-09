@@ -238,10 +238,19 @@ a:hover {
   min-height: 2rem;
 }
 
+.words-scatter {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  margin-bottom: 2rem;
+}
+
 .word-item {
+  position: absolute;
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 1.1em;
   color: #3b2f1e;
+  white-space: nowrap;
+  pointer-events: none;
 }
 
 .word-submit {
