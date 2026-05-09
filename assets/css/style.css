@@ -216,6 +216,10 @@ a:hover {
 }
 
 @media (max-width: 600px) {
+  .floating-feather {
+    font-size: 1.3em !important;
+  }
+
   .spiral-container {
     width: 100vw;
     margin-left: calc(-50vw + 50%);
