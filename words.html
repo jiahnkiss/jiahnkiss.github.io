@@ -1,0 +1,75 @@
+---
+layout: default
+title: words
+---
+
+<p><a href="{{ '/' | relative_url }}" class="back-link">&#8592;</a></p>
+
+<div class="words-page">
+
+  <div id="wordsList" class="words-list"></div>
+
+  <div id="submitArea" class="word-submit">
+    <input type="text" id="wordInput" class="word-input" placeholder="단어 하나를 남겨주세요" maxlength="20" autocomplete="off">
+    <button id="submitBtn" class="word-btn">남기기</button>
+  </div>
+
+  <p id="doneMsg" class="word-done" style="display:none;">이미 단어를 남겼어요.</p>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script>
+(function () {
+  firebase.initializeApp({
+    apiKey: "AIzaSyAFoqplDxxipGGIJmbd_gHFaFs712b5dUI",
+    authDomain: "jiahnkiss.firebaseapp.com",
+    projectId: "jiahnkiss",
+    storageBucket: "jiahnkiss.firebasestorage.app",
+    messagingSenderId: "332637553025",
+    appId: "1:332637553025:web:3baac6bbce558d1c4b6880"
+  });
+
+  var db = firebase.firestore();
+
+  // 단어 목록 실시간 표시
+  db.collection('words').orderBy('timestamp', 'asc').onSnapshot(function (snapshot) {
+    var list = document.getElementById('wordsList');
+    list.innerHTML = '';
+    snapshot.forEach(function (doc) {
+      var span = document.createElement('span');
+      span.className = 'word-item';
+      span.textContent = doc.data().word;
+      list.appendChild(span);
+    });
+  });
+
+  // 이미 제출했는지 확인
+  if (localStorage.getItem('room_word_submitted')) {
+    document.getElementById('submitArea').style.display = 'none';
+    document.getElementById('doneMsg').style.display = 'block';
+  }
+
+  // 단어 제출
+  document.getElementById('submitBtn').addEventListener('click', submit);
+  document.getElementById('wordInput').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') submit();
+  });
+
+  function submit() {
+    var word = document.getElementById('wordInput').value.trim();
+    if (!word) return;
+
+    db.collection('words').add({
+      word: word,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(function () {
+      localStorage.setItem('room_word_submitted', 'true');
+      document.getElementById('submitArea').style.display = 'none';
+      document.getElementById('doneMsg').style.display = 'block';
+    });
+  }
+})();
+</script>

@@ -226,6 +226,78 @@ a:hover {
   color: #2c1f0f;
 }
 
+.words-page {
+  margin-top: 2rem;
+}
+
+.words-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.2rem;
+  margin-bottom: 3rem;
+  min-height: 2rem;
+}
+
+.word-item {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.1em;
+  color: #3b2f1e;
+}
+
+.word-submit {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.word-input {
+  font-family: 'Gowun Batang', serif;
+  font-size: 0.95em;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #c9ad8a;
+  padding: 0.3rem 0.2rem;
+  color: #3b2f1e;
+  outline: none;
+  width: 14rem;
+}
+
+.word-input::placeholder {
+  color: #a8906e;
+}
+
+.word-btn {
+  font-family: 'Gowun Batang', serif;
+  font-size: 0.85em;
+  background: transparent;
+  border: 1px solid #c9ad8a;
+  color: #6b4a2a;
+  padding: 0.25rem 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.word-btn:hover {
+  background: #ede8de;
+}
+
+.word-done {
+  color: #a8906e;
+  font-size: 0.88em;
+}
+
+.words-link {
+  display: inline-block;
+  margin-top: 1.2rem;
+  font-size: 0.82em;
+  color: #a8906e;
+  text-decoration: none;
+}
+
+.words-link:hover {
+  color: #6b4a2a;
+}
+
 .back-link {
   font-size: 1.2em;
   text-decoration: none;
